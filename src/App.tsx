@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Header from "./components/header";
+import DetailsTable from "./components/table";
 
 function App() {
+  const [search, setSearch] = useState("");
+  const [checked, setChecked] = useState(true);
+  const handleSearch = (charactor: string) => {
+    setSearch(charactor);
+  };
+  const handleChecked = (toggle: boolean) => {
+    setChecked(toggle);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        backgroundColor: "#D8D8D8",
+        height: "100%",
+        display: "flex",
+        flex: 1,
+        flexDirection: "column",
+      }}
+    >
+      <Header background_color="#343951" header_type="company" />
+      <Header
+        background_color="#FFFFFF"
+        header_type="search"
+        search={search}
+        onSearch={handleSearch}
+        checked={checked}
+        onChecked={handleChecked}
+      />
+      <div style={{ width: "70%", alignSelf: "center", marginTop: 38 }}>
+        <DetailsTable search={search} checked={checked} />
+      </div>
     </div>
   );
 }
